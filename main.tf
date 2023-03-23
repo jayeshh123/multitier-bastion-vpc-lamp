@@ -10,9 +10,6 @@ terraform {
     }
   }
 }
-variable "api_key"{
-  default = "XO28Jt6j54LonIT2N07ioacbHjgikQ4ArDavNSHhRS5f"
-}
 
 provider "ibm" {
   ibmcloud_api_key = var.ibmcloud_api_key
