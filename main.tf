@@ -1,29 +1,29 @@
-terraform {
-  required_providers {
-    ibm = {
-      source  = "IBM-Cloud/ibm"
-      version = "1.46.0"
-    }
-    http = {
-      source = "hashicorp/http"
-      version = "3.1.0"
-    }
-  }
-}
-
-provider "ibm" {
-  ibmcloud_api_key = var.ibmcloud_api_key
-  region           = var.ibm_region
-  generation = local.generation
-}
-
-# # provider block required with Schematics to set VPC region
-# provider "ibm" {
-#   region = var.ibm_region
-#   ibmcloud_api_key = var.ibmcloud_api_key
-#   generation = local.generation
-#   version    = "1.46.0"
+# terraform {
+#   required_providers {
+#     ibm = {
+#       source  = "IBM-Cloud/ibm"
+#       version = "1.46.0"
+#     }
+#     http = {
+#       source = "hashicorp/http"
+#       version = "3.1.0"
+#     }
+#   }
 # }
+
+# provider "ibm" {
+#   ibmcloud_api_key = var.ibmcloud_api_key
+#   region           = var.ibm_region
+#   generation = local.generation
+# }
+
+# provider block required with Schematics to set VPC region
+provider "ibm" {
+  region = var.ibm_region
+  ibmcloud_api_key = var.ibmcloud_api_key
+  generation = local.generation
+  version    = "1.46.0"
+}
 
 data "ibm_resource_group" "all_rg" {
   name = var.resource_group_name
