@@ -10,9 +10,9 @@ variable "ibm_region" {
   # default     = "eu-gb"
 }
 
-variable "ibmcloud_api_key" {
-  description = "IBM Cloud API key when run standalone"
-}
+# variable "ibmcloud_api_key" {
+#   description = "IBM Cloud API key when run standalone"
+# }
 
 
 
@@ -97,5 +97,6 @@ data "ibm_is_ssh_key" "sshkey" {
 
 variable "ssh_key_name" {
   description = "Name giving to public SSH key uploaded to IBM Cloud for VSI access"
+  default = "jay-ssh-key"
 }
 
