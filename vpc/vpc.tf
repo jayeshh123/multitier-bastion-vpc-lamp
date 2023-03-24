@@ -9,6 +9,19 @@
 ##############################################################################
 # Create a VPC
 ##############################################################################
+terraform {
+  required_providers {
+    ibm = {
+      source  = "IBM-Cloud/ibm"
+      version = "1.46.0"
+    }
+    http = {
+      source = "hashicorp/http"
+      version = "3.1.0"
+    }
+  }
+}
+
 data "ibm_resource_group" "all_rg" {
   name = var.resource_group_name
 }
@@ -81,7 +94,3 @@ resource "ibm_is_public_gateway" "repo_gateway" {
 
 
 #############################################################################
-
-
-
-
