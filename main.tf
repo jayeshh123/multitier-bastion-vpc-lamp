@@ -1,29 +1,33 @@
-# terraform {
-#   required_providers {
-#     ibm = {
-#       source  = "IBM-Cloud/ibm"
-#       version = "1.46.0"
-#     }
-#     http = {
-#       source = "hashicorp/http"
-#       version = "3.1.0"
-#     }
-#   }
-# }
-
-# provider "ibm" {
-#   ibmcloud_api_key = var.ibmcloud_api_key
-#   region           = var.ibm_region
-#   generation = local.generation
-# }
-
-# provider block required with Schematics to set VPC region
-provider "ibm" {
-  region = var.ibm_region
-  ibmcloud_api_key = var.ibmcloud_api_key
-  generation = local.generation
-  version    = "~> 1.4"
+terraform {
+  required_providers {
+    ibm = {
+      source  = "IBM-Cloud/ibm"
+      version = "1.46.0"
+    }
+    http = {
+      source = "hashicorp/http"
+      version = "3.1.0"
+    }
+  }
 }
+
+variable "api_key"{
+  default = "XO28Jt6j54LonIT2N07ioacbHjgikQ4ArDavNSHhRS5f"
+}
+
+provider "ibm" {
+  ibmcloud_api_key = var.api_key
+  region           = var.ibm_region
+  generation = local.generation
+}
+
+# # provider block required with Schematics to set VPC region
+# provider "ibm" {
+#   region = var.ibm_region
+#   #ibmcloud_api_key = var.ibmcloud_api_key
+#   generation = local.generation
+#   version    = "~> 1.4"
+# }
 
 data "ibm_resource_group" "all_rg" {
   name = var.resource_group_name
@@ -44,9 +48,9 @@ locals {
 ##################################################################################################
 
 
-data "external" "env" { program = ["jq", "-n", "env"] }
+#data "external" "env" { program = ["jq", "-n", "env"] }
 locals {
-  region = lookup(data.external.env.result, "TF_VAR_SCHEMATICSLOCATION", "")
+  region = "us-south"
   geo    = substr(local.region, 0, 2)
   schematics_ssh_access_map = {
     us = ["169.44.0.0/14", "169.60.0.0/14"],
