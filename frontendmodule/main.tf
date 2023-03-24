@@ -12,6 +12,19 @@
 # defined in the site.yml playbook file. 
 ##############################################################################
 
+terraform {
+  required_providers {
+    ibm = {
+      source  = "IBM-Cloud/ibm"
+      version = "1.46.0"
+    }
+    http = {
+      source = "hashicorp/http"
+      version = "3.1.0"
+    }
+  }
+}
+
 
 resource "ibm_is_instance" "frontend-server" {
   count   = var.frontend_count
@@ -161,4 +174,3 @@ resource "ibm_is_security_group_rule" "frontend_access" {
     }
   }
 }
-
