@@ -8,6 +8,18 @@
 # the associated VPC module or used to add bastion host functionality to 
 # other VPC configurations  
 ##############################################################################
+terraform {
+  required_providers {
+    ibm = {
+      source  = "IBM-Cloud/ibm"
+      version = "1.46.0"
+    }
+    http = {
+      source = "hashicorp/http"
+      version = "3.1.0"
+    }
+  }
+}
 
 
 resource "ibm_is_instance" "bastion" {
@@ -65,7 +77,3 @@ resource "ibm_is_subnet" "bastion_subnet" {
   network_acl     = ibm_is_network_acl.bastion_acl.id
   depends_on      = [ibm_is_vpc_address_prefix.bast_subnet_prefix]
 }
-
-
-
-
